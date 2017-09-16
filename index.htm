@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+ <style type="text/css">
+ @font-face {
+   font-family: customfont;
+   src: url(waukegan.ttf);
+}
+html,body{
+	height: 100%;width: 100%;text-align: center;margin: 0;
+}
+#myCanvas{border:1px solid #d3d3d3;height: 300px;width: 300px;}
+
+  #download { color:#000;text-decoration: none; font-size: 33px;}
+    #download:link { color:#000;text-decoration: none;font-size: 33px;}
+    #download:visited { color:#000;text-decoration: none;font-size: 33px;}
+    #download:hover { color:#000;text-decoration: none;font-size: 33px;}
+    #download:active { color:#000;text-decoration: none;font-size: 33px;}
+
+#input{
+	margin-top: 15px;
+margin-bottom: 15px;
+width: 250px;
+height: 33px;
+}
+
+ </style>
+ 
+</head>
+<body>
+<input id="input" placeholder="beirut" onchange="livelove(this.value)"><br>
+<canvas id="myCanvas" style="">
+Your browser does not support the HTML5 canvas tag.</canvas><br>
+<a id="download" href="" download>Download</a>
+<script>
+
+function livelove(txt="beirut"){
+var c = document.getElementById("myCanvas");
+
+var x=360; //default height and width
+var ctx = c.getContext("2d");
+ctx.font = "90px Arial";
+if(txt.trim()==""){txt="beirut";}
+txt=txt.toUpperCase();
+var len=ctx.measureText(txt).width;
+
+if(x<len+30){x=len+30;}
+
+c.width=x;
+c.height=x;
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, x, x);
+
+ctx.font = "91px customfont";
+ctx.fillStyle = "white";
+ctx.fillText('LIVE', 36.9, 124.6);
+ctx.fillText('LOVE', 36.9, 198.5);
+ctx.fillStyle = "#C7FD22";
+ctx.fillText(txt, 36.9, 272.3);
+
+var url = c.toDataURL();
+ var download = document.getElementById("download");
+ download.setAttribute("href", url);
+}
+
+const myFont = new FontFace('customfont', 'url(waukegan.ttf)');
+myFont.load().then(() => {
+livelove();
+});
+</script>
+</body>
+</html>
